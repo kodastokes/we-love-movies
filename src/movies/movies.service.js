@@ -5,9 +5,17 @@ function list() {
   return knex("movies").select("*");
 }
 
+function read(movie_id) {
+    return knex("movies as m")
+      .select("m.*")
+      .where({ "m.movie_id": movie_id })
+      .first()
+    //   .then(addCategory);
+  }
+
 module.exports = {
   list,
-//   read,
+  read,
 //   listOutOfStockCount,
 //   listPriceSummary,
 //   listTotalWeightByProduct,
