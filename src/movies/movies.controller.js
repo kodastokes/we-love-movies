@@ -15,24 +15,16 @@ function read(req, res) {
   res.json({ data });
 }
 
-// async function list(req, res) {
-//   const data = await moviesService.list();
-//   res.json({ data });
-// }
-
 async function list(req, res) {
     const isShowing = req.query.is_showing
     if (isShowing) {
-       res.json({ data: await service.listMovie() })
+       res.json({ data: await moviesService.listMovie() })
     } else {
-        res.json({ data: await service.list() })
+        res.json({ data: await moviesService.list() })
     }
 }
 
 module.exports = {
   read: [asyncErrorBoundary(movieExists), read],
   list: asyncErrorBoundary(list),
-  //   listOutOfStockCount: asyncErrorBoundary(listOutOfStockCount),
-  //   listPriceSummary: asyncErrorBoundary(listPriceSummary),
-  //   listTotalWeightByProduct: asyncErrorBoundary(listTotalWeightByProduct),
 };
