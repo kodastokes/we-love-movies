@@ -15,9 +15,18 @@ function read(req, res) {
   res.json({ data });
 }
 
+// async function list(req, res) {
+//   const data = await moviesService.list();
+//   res.json({ data });
+// }
+
 async function list(req, res) {
-  const data = await moviesService.list();
-  res.json({ data });
+    const isShowing = req.query.is_showing
+    if (isShowing) {
+       res.json({ data: await service.listMovie() })
+    } else {
+        res.json({ data: await service.list() })
+    }
 }
 
 module.exports = {
